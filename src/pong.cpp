@@ -1,3 +1,5 @@
+#define SDL_MAIN_HANDLED
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -42,6 +44,7 @@ float calc_angle(float y1, float y2, int height)
 int main(int argc, char *argv[])
 {
 
+		SDL_SetMainReady();
     std::cout << "Starting SDL Application..." << std::endl;
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
