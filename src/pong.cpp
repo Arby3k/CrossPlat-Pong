@@ -385,11 +385,11 @@ void Initialise(SDL_Renderer **ren, SDL_Window **win)
         sdl_bomb("Failed to load TTF extension");
 }
 
-void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_Joystick **controller)
+void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_GameController **controller)
 {
     SDL_DestroyRenderer(*ren);
     SDL_DestroyWindow(*win);
-    SDL_JoystickClose(*controller);
+    SDL_GameControllerClose(*controller);
 
     TTF_Quit();
     IMG_Quit();
