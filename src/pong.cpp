@@ -112,12 +112,6 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         const int JOYSTICK_DEAD_ZONE = 500;
         
 
-        int q =  SDL_JoystickNumAxes(controller);
-        std::cout <<"\n" << q;
-
-
-
-
     int board_width;
     int board_height;
     SDL_Texture *squareTex = IMG_LoadTexture(ren, "../img/pong_board.png");
@@ -202,6 +196,8 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         {
             //x_move = SDL_JoystickGetAxis(controller, 0);
             y_move = SDL_JoystickGetAxis(controller, 1);
+        int q =  SDL_JoystickNumAxes(controller);
+        std::cout <<"\n" << q;
         }
 
         // Player Movement
