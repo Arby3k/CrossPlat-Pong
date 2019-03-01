@@ -187,25 +187,20 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            if( e.type == SDL_JOYAXISMOTION ){
+            if( e.type == SDL_JoyButtonEvent ){
                         //Motion on controller 0
-                        if( e.jaxis.which == 0 ){                        
-                            //X axis motion
-                            if( e.jaxis.axis == 0 ){
-                                //Left of dead zone
-                                if( e.jaxis.value < -JOYSTICK_DEAD_ZONE ){
-                                    xDir = -1;
-                                }
-                                //Right of dead zone
-                                else if( e.jaxis.value > JOYSTICK_DEAD_ZONE ){
-                                    xDir =  1;
-                                }
-                                else{
-                                    xDir = 0;
-                                 }
-                            }
+                        if( e.jbutton.which == 0 ){                        
+                            xDir = -1;
                         }
-             }
+                       
+                        else if( e.jbutton.which == 1){
+                            xDir =  1;
+                        }
+                        else{
+                            xDir = 0;
+                        }
+                            
+            }
         }
 
 
