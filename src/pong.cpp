@@ -195,10 +195,10 @@ int main(int argc, char *argv[])
         while (SDL_PollEvent(&e)){
             if (e.type == SDL_QUIT)
                 quit = true;
-            else if (e.type == SDL_KEYDOWN)
-            {
-                switch (e.key.keysym.scancode)
-                {
+            else if (e.type == SDL_KEYDOWN){
+
+                switch (e.key.keysym.scancode){
+                
                 case SDL_SCANCODE_ESCAPE:
                     quit = true;
                     break;
@@ -219,9 +219,9 @@ int main(int argc, char *argv[])
 
         if (controller)
         {
-            cout << SDL_JoystickNumButtons(controller) << "\n";
-            downButton = SDL_JoystickGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
-            upButton = SDL_JoystickGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+            std::cout << SDL_JoystickNumButtons(controller) << "\n";
+            downButton = SDL_JoystickGetButton(controller, 12);
+            upButton = SDL_JoystickGetButton(controller, 5);
 
         }
 
