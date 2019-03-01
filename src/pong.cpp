@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
 
     int xDir = 0;
     int yDir = 0;
-    const int JOYSTICK_DEAD_ZONE = 2000;
+    const int JOYSTICK_DEAD_ZONE = 10000;
 
     int board_width;
     int board_height;
