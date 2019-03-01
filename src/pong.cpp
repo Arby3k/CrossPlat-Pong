@@ -262,8 +262,9 @@ int main(int argc, char *argv[])
         {
             //std::cout << SDL_JoystickNumButtons(controller) << "\n";
             downButton = SDL_JoystickGetAxis(controller, 1);
-            std::cout << downButton << "\n";
-            //upButton = SDL_JoystickGetAxis(controller, 0);
+            upButton = SDL_JoystickGetAxis(controller, 0);
+            std::cout << "Y Axis:" << downButton << " X Axis:  " << upButton << "\n";
+
             //SDL_HapticRumblePlay(haptic, 0.7, 1000);
         }
 
