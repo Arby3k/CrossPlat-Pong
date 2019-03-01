@@ -81,6 +81,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         controller = SDL_GameControllerOpen(i);
         haptic = SDL_HapticOpen(i);
         SDL_HapticRumbleInit(haptic);
+        std::cout << "Found a controller: " << SDL_GameControllerName(controller) << std::endl;
         if (controller) {
             break;
         }
@@ -202,6 +203,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                 }
             }
             if (e.type == SDL_CONTROLLERBUTTONDOWN){
+                std::cout << "Button pressed on controller: ";
                 if (e.cbutton.which == i){
                     if (e.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_UP){
                         upButton = 1;
