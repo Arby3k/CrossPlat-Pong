@@ -214,8 +214,8 @@ int main(int argc, char *argv[])
 
 
 
-        Uint8 upButton = 0;
-        Uint8 downButton = 0;
+        short upButton = 0;
+        short downButton = 0;
 
         if (controller)
         {
