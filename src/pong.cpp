@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
             else
             {
                 //Get controller haptic device
-                haptic = SDL_HapticOpen( controller );
+                haptic = SDL_HapticOpenFromJoystick( controller );
                 if( haptic == NULL )
                 {
                     printf( "Warning: Controller does not support haptics! SDL Error: %s\n", SDL_GetError() );
