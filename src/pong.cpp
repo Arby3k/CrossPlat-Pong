@@ -187,7 +187,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            if( e.type == SDL_JoyButtonEvent ){
+            if( e.type == SDL_JOYBUTTONDOWN ){
                         //Motion on controller 0
                         if( e.jbutton.which == 0 ){                        
                             xDir = -1;
