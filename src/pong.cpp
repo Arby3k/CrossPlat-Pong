@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
     SDL_GameController *controller = nullptr;
 
     SDL_Haptic *haptic = nullptr;
+
     SDL_Init(SDL_INIT_EVERYTHING);
     Initialise(&ren, &win);
     //BLAH!
@@ -202,7 +203,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            if (e.type == SDL_CONTROLLERBUTTONDOWN){
+            if (e.state == SDL_PRESSED){
                 std::cout << "Button pressed on controller: ";
                 if (e.cbutton.which == i){
                     if (e.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_UP){
