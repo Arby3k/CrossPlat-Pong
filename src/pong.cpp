@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
             }
             else if( e.type == SDL_JOYBUTTONDOWN ){
                         //Play rumble at 75% strenght for 500 milliseconds
-                        if( SDL_HapticRumblePlay( gControllerHaptic, 0.75, 500 ) != 0 ){
+                        if( SDL_HapticRumblePlay( haptic, 0.75, 500 ) != 0 ){
                             printf( "Warning: Unable to play rumble! %s\n", SDL_GetError() );
                         }
             }
