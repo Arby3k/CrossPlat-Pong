@@ -44,7 +44,7 @@ float calc_angle(float y1, float y2, int height)
 int main(int argc, char *argv[])
 {
 
-		SDL_SetMainReady();
+	SDL_SetMainReady();
     std::cout << "Starting SDL Application..." << std::endl;
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
@@ -52,8 +52,9 @@ int main(int argc, char *argv[])
     SDL_Joystick *controller = nullptr;
 
     SDL_Haptic *haptic = nullptr;
-
+    SDL_Init(SDL_INIT_EVERYTHING);
     Initialise(&ren, &win);
+    //BLAH!
  /*   
 int i;
 for (int i = 0; i < SDL_NumJoysticks(); ++i) {
@@ -174,8 +175,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
             prevTime = currTime;
         }
 
-        while (SDL_PollEvent(&e))
-        {
+        while (SDL_PollEvent(&e)){
             if (e.type == SDL_QUIT)
                 quit = true;
             if (e.type == SDL_KEYDOWN)
@@ -187,7 +187,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            else if( e.type == SDL_JOYAXISMOTION ){
+            if( e.type == SDL_JOYAXISMOTION ){
                         //Motion on controller 0
                         if( e.jaxis.which == 0 ){                        
                             //X axis motion
@@ -202,10 +202,10 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                                 }
                                 else{
                                     xDir = 0;
-                                }
+                                 }
                             }
                         }
-                    }
+             }
         }
 
 
