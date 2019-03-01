@@ -49,22 +49,68 @@ int main(int argc, char *argv[])
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
     SDL_Window *win = nullptr;
-    SDL_GameController *controller = nullptr;
+    SDL_Joystick *controller = nullptr;
 
     SDL_Haptic *haptic = nullptr;
 
     Initialise(&ren, &win);
+ /*   
+int i;
+for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+    if (SDL_IsGameController(i)) {
+        printf("Joystick %i is supported by the game controller interface!\n", i);
+    }
+}
+
 
     // Check for controller support
-    if (SDL_NumJoysticks() == 1 && SDL_IsGameController(0))
+    if (SDL_NumJoysticks() >= 0 && SDL_IsGameController(i))
     {
-        controller = SDL_GameControllerOpen(0);
+        controller = SDL_GameControllerOpen(i);
         std::cout << "Found a controller: " << SDL_GameControllerName(controller) << std::endl;
 
-        haptic = SDL_HapticOpen(0);
+        haptic = SDL_HapticOpen(i);
 
         SDL_HapticRumbleInit(haptic);
     }
+    */
+
+        //Check for joysticks
+        if( SDL_NumJoysticks() < 1 )
+        {
+            printf( "Warning: No joysticks connected!\n" );
+        }
+        else
+        {
+            //Load joystick
+            controller = SDL_JoystickOpen( 0 );
+            if( controller == NULL )
+            {
+                printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
+            }
+            else
+            {
+                //Get controller haptic device
+                haptic = SDL_HapticOpenFromJoystick( controller );
+                if( haptic == NULL )
+                {
+                    printf( "Warning: Controller does not support haptics! SDL Error: %s\n", SDL_GetError() );
+                }
+                else
+                {
+                    //Get initialize rumble
+                    if( SDL_HapticRumbleInit( haptic ) < 0 )
+                    {
+                        printf( "Warning: Unable to initialize rumble! SDL Error: %s\n", SDL_GetError() );
+                    }
+                }
+            }
+        }
+
+
+
+
+
 
     int board_width;
     int board_height;
@@ -114,6 +160,7 @@ int main(int argc, char *argv[])
     while (!quit)
     {
 
+
         // FPS Calculation
         ++frames;
         unsigned int currTime = SDL_GetTicks();
@@ -146,8 +193,8 @@ int main(int argc, char *argv[])
 
         if (controller)
         {
-            downButton = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
-            upButton = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+            //downButton = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+           // upButton = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
         }
 
         // Player Movement
@@ -305,7 +352,7 @@ void Initialise(SDL_Renderer **ren, SDL_Window **win)
         sdl_bomb("Failed to Initialise SDL");
 
     *win = SDL_CreateWindow(
-        "SDL Pong by Michael Aquilina",
+        "SDL Pong by Michael Aquilina Struggled on by Arbab",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         SCREEN_WIDTH, SCREEN_HEIGHT,
         SDL_WINDOW_SHOWN);
@@ -324,11 +371,11 @@ void Initialise(SDL_Renderer **ren, SDL_Window **win)
         sdl_bomb("Failed to load TTF extension");
 }
 
-void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_GameController **controller)
+void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_Jo **controller)
 {
     SDL_DestroyRenderer(*ren);
     SDL_DestroyWindow(*win);
-    SDL_GameControllerClose(*controller);
+    SDL_JoystickClose(*controller);
 
     TTF_Quit();
     IMG_Quit();
