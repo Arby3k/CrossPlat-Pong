@@ -75,10 +75,11 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         SDL_HapticRumbleInit(haptic);
     }
     */
+   int i;
    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
        if (SDL_IsGameController(i)) {
         controller = SDL_GameControllerOpen(i);
-        haptic = SDL_HapticOpen(controller);
+        haptic = SDL_HapticOpen(i);
         SDL_HapticRumbleInit(haptic);
         if (controller) {
             break;
@@ -173,7 +174,8 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
 
     while (!quit)
     {
-
+        short upButton = 0;
+        short downButton = 0;
 
         // FPS Calculation
         ++frames;
@@ -199,12 +201,22 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
+            if (e.type == SDL_CONTROLLERBUTTONDOWN){
+                if (e.cbutton.which == i){
+                    if (e.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_UP){
+                        upButton = 1;
+                    }
+                    else{
+                        upButton = 0;
+                    }
+                }
+            }
+
         }
 
 
-        //Uint8 upButton = 0;
-        //Uint8 downButton = 0;
-        short x_move, y_move;
+
+  
 /*
         if (controller)
         {
@@ -213,9 +225,9 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         }
 */
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || y_move >= 2000)
+        if (keystates[SDL_SCANCODE_UP] || upButton == 1)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || y_move <= -2000)
+        if (keystates[SDL_SCANCODE_DOWN] || downButton == 1)
             p1.pos.y += p1.speed;
 
         // Basic AI
