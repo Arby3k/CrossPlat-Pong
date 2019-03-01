@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
                     break;
                 }
             }
-            else if( e.type == SDL_JOYBUTTONDOWN ){
+            else if( e.type == SDL_JOYAXISMOTION ){
                         //Play rumble at 75% strenght for 500 milliseconds
                         if( SDL_HapticRumblePlay( haptic, 0.75, 500 ) != 0 ){
                             printf( "Warning: Unable to play rumble! %s\n", SDL_GetError() );
@@ -217,9 +217,9 @@ int main(int argc, char *argv[])
         if (controller)
         {
             //std::cout << SDL_JoystickNumButtons(controller) << "\n";
-            downButton = SDL_JoystickGetButton(controller, 13);
+            downButton = SDL_JoystickGetAxis(controller, 1);
             std::cout << downButton << "\n"; 
-            upButton = SDL_JoystickGetButton(controller, 0);
+            upButton = SDL_JoystickGetAxis(controller, 0);
             //SDL_HapticRumblePlay(haptic, 0.7, 1000);
 
         }
