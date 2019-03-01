@@ -76,16 +76,17 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
     }
     */
    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
-    if (SDL_IsGameController(i)) {
+       if (SDL_IsGameController(i)) {
         controller = SDL_GameControllerOpen(i);
         haptic = SDL_HapticOpen(i)
         if (controller) {
             break;
-        } else {
+        }
+        else {
             fprintf(stderr, "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
+            }
         }
     }
-}
 /*
         //Check for joysticks
         if( SDL_NumJoysticks() < 1 )
@@ -203,13 +204,13 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         //Uint8 upButton = 0;
         //Uint8 downButton = 0;
         short x_move, y_move;
-
+/*
         if (controller)
         {
             
 
         }
-
+*/
         // Player Movement
         if (keystates[SDL_SCANCODE_UP] || y_move >= 2000)
             p1.pos.y -= p1.speed;
