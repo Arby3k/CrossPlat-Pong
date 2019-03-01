@@ -44,7 +44,7 @@ float calc_angle(float y1, float y2, int height)
 int main(int argc, char *argv[])
 {
 
-	SDL_SetMainReady();
+    SDL_SetMainReady();
     std::cout << "Starting SDL Application..." << std::endl;
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 
     SDL_Init(SDL_INIT_EVERYTHING);
     Initialise(&ren, &win);
+    
     /*
     int i;
     for (int i = 0; i < SDL_NumJoysticks(); ++i) {
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
         SDL_HapticRumbleInit(haptic);
     }
     */
-   /*
+    /*
    int i;
    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
        if (SDL_IsGameController(i)) {
@@ -93,42 +94,41 @@ int main(int argc, char *argv[])
     }
     */
 
-        //Check for joysticks
-        if( SDL_NumJoysticks() < 1 )
+    //Check for joysticks
+    if (SDL_NumJoysticks() < 1)
+    {
+        printf("Warning: No joysticks connected!\n");
+    }
+    else
+    {
+        //Load joystick
+        controller = SDL_JoystickOpen(2);
+        if (controller == NULL)
         {
-            printf( "Warning: No joysticks connected!\n" );
+            printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
         }
         else
         {
-            //Load joystick
-            controller = SDL_JoystickOpen( 2 );
-            if( controller == NULL )
+            //Get controller haptic device
+            haptic = SDL_HapticOpenFromJoystick(controller);
+            if (haptic == NULL)
             {
-                printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
+                printf("Warning: Controller does not support haptics! SDL Error: %s\n", SDL_GetError());
             }
             else
             {
-                //Get controller haptic device
-                haptic = SDL_HapticOpenFromJoystick( controller );
-                if( haptic == NULL )
+                //Get initialize rumble
+                if (SDL_HapticRumbleInit(haptic) < 0)
                 {
-                    printf( "Warning: Controller does not support haptics! SDL Error: %s\n", SDL_GetError() );
-                }
-                else
-                {
-                    //Get initialize rumble
-                    if( SDL_HapticRumbleInit( haptic ) < 0 )
-                    {
-                        printf( "Warning: Unable to initialize rumble! SDL Error: %s\n", SDL_GetError() );
-                    }
+                    printf("Warning: Unable to initialize rumble! SDL Error: %s\n", SDL_GetError());
                 }
             }
         }
-        
-        //int xDir = 0;
-        //int yDir = 0;
-        const int JOYSTICK_DEAD_ZONE = 500;
-        
+    }
+
+    int xDir = 0;
+    int yDir = 0;
+    const int JOYSTICK_DEAD_ZONE = 2000;
 
     int board_width;
     int board_height;
@@ -175,7 +175,8 @@ int main(int argc, char *argv[])
     char buffer[512];
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
-    while (!quit){
+    while (!quit)
+    {
 
         // FPS Calculation
         ++frames;
@@ -189,27 +190,65 @@ int main(int argc, char *argv[])
             prevTime = currTime;
         }
 
-        while (SDL_PollEvent(&e)){
+        while (SDL_PollEvent(&e))
+        {
             if (e.type == SDL_QUIT)
                 quit = true;
-            else if (e.type == SDL_KEYDOWN){
+            else if (e.type == SDL_KEYDOWN)
+            {
 
-                switch (e.key.keysym.scancode){
-                
+                switch (e.key.keysym.scancode)
+                {
+
                 case SDL_SCANCODE_ESCAPE:
                     quit = true;
                     break;
                 }
             }
-            else if( e.type == SDL_JOYAXISMOTION ){
-                        //Play rumble at 75% strenght for 500 milliseconds
-                        if( SDL_HapticRumblePlay( haptic, 0.75, 500 ) != 0 ){
-                            printf( "Warning: Unable to play rumble! %s\n", SDL_GetError() );
+            else if (e.type == SDL_JOYAXISMOTION)
+            {
+                //Motion on controller 0
+                if (e.jaxis.which == 0)
+                {
+                    //X axis motion
+                    if (e.jaxis.axis == 0)
+                    {
+                        //Left of dead zone
+                        if (e.jaxis.value < -JOYSTICK_DEAD_ZONE)
+                        {
+                            xDir = -1;
                         }
+                        //Right of dead zone
+                        else if (e.jaxis.value > JOYSTICK_DEAD_ZONE)
+                        {
+                            xDir = 1;
+                        }
+                        else
+                        {
+                            xDir = 0;
+                        }
+                    }
+                    //Y axis motion
+                    else if (e.jaxis.axis == 1)
+                    {
+                        //Below of dead zone
+                        if (e.jaxis.value < -JOYSTICK_DEAD_ZONE)
+                        {
+                            yDir = -1;
+                        }
+                        //Above of dead zone
+                        else if (e.jaxis.value > JOYSTICK_DEAD_ZONE)
+                        {
+                            yDir = 1;
+                        }
+                        else
+                        {
+                            yDir = 0;
+                        }
+                    }
+                }
             }
         }
-
-
 
         static short upButton = 0;
         static short downButton = 0;
@@ -218,16 +257,15 @@ int main(int argc, char *argv[])
         {
             //std::cout << SDL_JoystickNumButtons(controller) << "\n";
             downButton = SDL_JoystickGetAxis(controller, 1);
-            std::cout << downButton << "\n"; 
+            std::cout << downButton << "\n";
             upButton = SDL_JoystickGetAxis(controller, 0);
             //SDL_HapticRumblePlay(haptic, 0.7, 1000);
-
         }
 
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || upButton)
+        if (keystates[SDL_SCANCODE_UP] || yDir > 1)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || downButton)
+        if (keystates[SDL_SCANCODE_DOWN] || yDir <1)
             p1.pos.y += p1.speed;
 
         // Basic AI
