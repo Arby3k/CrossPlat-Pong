@@ -177,9 +177,6 @@ int main(int argc, char *argv[])
 
     while (!quit){
 
-        short upButton = 0;
-        short downButton = 0;
-
         // FPS Calculation
         ++frames;
         unsigned int currTime = SDL_GetTicks();
