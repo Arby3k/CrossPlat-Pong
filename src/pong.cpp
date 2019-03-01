@@ -78,7 +78,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
        if (SDL_IsGameController(i)) {
         controller = SDL_GameControllerOpen(i);
-        haptic = SDL_HapticOpen(i)
+        haptic = SDL_HapticOpen(i);
         if (controller) {
             break;
         }
