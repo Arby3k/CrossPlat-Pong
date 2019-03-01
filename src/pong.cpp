@@ -107,12 +107,13 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                 }
             }
         }
-        int xDir = 0;
-        int yDir = 0;
+        //int xDir = 0;
+        //int yDir = 0;
         const int JOYSTICK_DEAD_ZONE = 500;
+        
 
         int q =  SDL_JoystickNumAxes(controller);
-        std::cout << q;
+        std::cout <<"\n" << q;
 
 
 
@@ -190,36 +191,23 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            if( e.type == SDL_JOYBUTTONDOWN ){
-                        //Motion on controller 0
-                        if( e.jbutton.which == 0 ){                        
-                            xDir = -1;
-                        }
-                       
-                        else if( e.jbutton.which == 1){
-                            xDir =  1;
-                        }
-                        else{
-                            xDir = 0;
-                        }
-                            
-            }
         }
 
 
         //Uint8 upButton = 0;
         //Uint8 downButton = 0;
+        short x_move, y_move;
 
         if (controller)
         {
-            //downButton = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
-           // upButton = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+            //x_move = SDL_JoystickGetAxis(controller, 0);
+            y_move = SDL_JoystickGetAxis(controller, 1);
         }
 
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || xDir == 1)
+        if (keystates[SDL_SCANCODE_UP] || y_move >= 2000)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || xDir == -1)
+        if (keystates[SDL_SCANCODE_DOWN] || y_move <= -2000)
             p1.pos.y += p1.speed;
 
         // Basic AI
