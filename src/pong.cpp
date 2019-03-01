@@ -111,6 +111,9 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         int yDir = 0;
         const int JOYSTICK_DEAD_ZONE = 500;
 
+        int q =  SDL_JoystickNumAxes(controller);
+        std::cout << q;
+
 
 
 
