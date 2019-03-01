@@ -75,7 +75,18 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         SDL_HapticRumbleInit(haptic);
     }
     */
-
+   for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+    if (SDL_IsGameController(i)) {
+        controller = SDL_GameControllerOpen(i);
+        haptic = SDL_Haptic(i)
+        if (controller) {
+            break;
+        } else {
+            fprintf(stderr, "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
+        }
+    }
+}
+/*
         //Check for joysticks
         if( SDL_NumJoysticks() < 1 )
         {
@@ -107,6 +118,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                 }
             }
         }
+        */
         //int xDir = 0;
         //int yDir = 0;
         const int JOYSTICK_DEAD_ZONE = 500;
