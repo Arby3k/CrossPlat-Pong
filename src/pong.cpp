@@ -194,24 +194,26 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
 
         if (controller)
         {
+            /*
             //x_move = SDL_JoystickGetAxis(controller, 0);
-            y_move = SDL_JoystickGetAxis(controller, 0);
+            y_move = SDL_JoystickGetButton(controller, 0);
             std::cout <<"\nAxis0:" << y_move;
-            y_move = SDL_JoystickGetAxis(controller, 1);
+            y_move = SDL_JoystickGetButton(controller, 1);
             std::cout <<"\nAxis1:" << y_move;
-            y_move = SDL_JoystickGetAxis(controller, 2);
+            y_move = SDL_JoystickGetButton(controller, 2);
             std::cout <<"\nAxis2:" << y_move;
-            y_move = SDL_JoystickGetAxis(controller, 3);
+            y_move = SSDL_JoystickGetButton(controller, 3);
             std::cout <<"\nAxis3:" << y_move;
-            y_move = SDL_JoystickGetAxis(controller, 4);
+            y_move = SDL_JoystickGetButton(controller, 4);
             std::cout <<"\nAxis4:" << y_move;
-            y_move = SDL_JoystickGetAxis(controller, 5);
+            y_move = SDL_JoystickGetButton(controller, 5);
             std::cout <<"\nAxis5:" << y_move;
-            y_move = SDL_JoystickGetAxis(controller, 6);
+            y_move = SDL_JoystickGetButton(controller, 6);
             std::cout <<"\nAxis6:" << y_move;
+            */
 
-        //int q =  SDL_JoystickNumAxes(controller);
-        //std::cout <<"\n" << q;
+        int q =  SDL_JoystickNumButtons(controller);
+        std::cout <<"\n" << q;
         }
 
         // Player Movement
