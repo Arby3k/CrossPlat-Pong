@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
     else
     {
         //Load joystick
-        controller = SDL_JoystickOpen(2);
+        controller = SDL_JoystickOpen(1);
         if (controller == NULL)
         {
             printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
@@ -256,8 +256,8 @@ int main(int argc, char *argv[])
         if (controller)
         {
             //std::cout << SDL_JoystickNumButtons(controller) << "\n";
-            //downButton = SDL_JoystickGetAxis(controller, 1);
-            //std::cout << downButton << "\n";
+            downButton = SDL_JoystickGetAxis(controller, 1);
+            std::cout << downButton << "\n";
             //upButton = SDL_JoystickGetAxis(controller, 0);
             //SDL_HapticRumblePlay(haptic, 0.7, 1000);
         }
