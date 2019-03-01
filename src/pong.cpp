@@ -49,20 +49,19 @@ int main(int argc, char *argv[])
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
     SDL_Window *win = nullptr;
-    SDL_GameController *controller = nullptr;
+    SDL_Joystick *controller = nullptr;
 
     SDL_Haptic *haptic = nullptr;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     Initialise(&ren, &win);
-    //BLAH!
- /*   
-int i;
-for (int i = 0; i < SDL_NumJoysticks(); ++i) {
-    if (SDL_IsGameController(i)) {
-        printf("Joystick %i is supported by the game controller interface!\n", i);
+    /*
+    int i;
+    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+        if (SDL_IsGameController(i)) {
+            printf("Joystick %i is supported by the game controller interface!\n", i);
+        }
     }
-}
 
 
     // Check for controller support
@@ -76,6 +75,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         SDL_HapticRumbleInit(haptic);
     }
     */
+   /*
    int i;
    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
        if (SDL_IsGameController(i)) {
@@ -91,7 +91,8 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
             }
         }
     }
-/*
+    */
+
         //Check for joysticks
         if( SDL_NumJoysticks() < 1 )
         {
@@ -123,7 +124,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                 }
             }
         }
-        */
+        
         //int xDir = 0;
         //int yDir = 0;
         const int JOYSTICK_DEAD_ZONE = 500;
@@ -203,18 +204,6 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            if (e.state == SDL_PRESSED){
-                std::cout << "Button pressed on controller: ";
-                if (e.cbutton.which == i){
-                    if (e.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_UP){
-                        upButton = 1;
-                    }
-                    else{
-                        upButton = 0;
-                    }
-                }
-            }
-
         }
 
 
@@ -401,11 +390,11 @@ void Initialise(SDL_Renderer **ren, SDL_Window **win)
         sdl_bomb("Failed to load TTF extension");
 }
 
-void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_GameController **controller)
+void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_Joystick **controller)
 {
     SDL_DestroyRenderer(*ren);
     SDL_DestroyWindow(*win);
-    SDL_GameControllerClose(*controller);
+    SDL_JoystickClose(*controller);
 
     TTF_Quit();
     IMG_Quit();
