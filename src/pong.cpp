@@ -256,16 +256,16 @@ int main(int argc, char *argv[])
         if (controller)
         {
             //std::cout << SDL_JoystickNumButtons(controller) << "\n";
-            downButton = SDL_JoystickGetAxis(controller, 1);
-            std::cout << downButton << "\n";
-            upButton = SDL_JoystickGetAxis(controller, 0);
+            //downButton = SDL_JoystickGetAxis(controller, 1);
+            //std::cout << downButton << "\n";
+            //upButton = SDL_JoystickGetAxis(controller, 0);
             //SDL_HapticRumblePlay(haptic, 0.7, 1000);
         }
 
         // Player Movement
         if (keystates[SDL_SCANCODE_UP] || yDir > 1)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || yDir <1)
+        if (keystates[SDL_SCANCODE_DOWN] || yDir < -1)
             p1.pos.y += p1.speed;
 
         // Basic AI
