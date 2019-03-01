@@ -106,7 +106,8 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                 }
             }
         }
-
+        int xDir = 0;
+        int yDir = 0;
 
 
 
@@ -186,10 +187,33 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
+            else if( e.type == SDL_JOYAXISMOTION )
+                    {
+                        //Motion on controller 0
+                        if( e.jaxis.which == 0 )
+                        {                        
+                            //X axis motion
+                            if( e.jaxis.axis == 0 )
+                            {
+                                //Left of dead zone
+                                if( e.jaxis.value < -JOYSTICK_DEAD_ZONE )
+                                {
+                                    xDir = -1;
+                                }
+                                //Right of dead zone
+                                else if( e.jaxis.value > JOYSTICK_DEAD_ZONE )
+                                {
+                                    xDir =  1;
+                                }
+                                else
+                                {
+                                    xDir = 0;
+                                }
+                            }
         }
 
-        Uint8 upButton = 0;
-        Uint8 downButton = 0;
+        //Uint8 upButton = 0;
+        //Uint8 downButton = 0;
 
         if (controller)
         {
@@ -198,9 +222,9 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         }
 
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || upButton)
+        if (keystates[SDL_SCANCODE_UP] || xDir = 1)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || downButton)
+        if (keystates[SDL_SCANCODE_DOWN] || xDir = -1)
             p1.pos.y += p1.speed;
 
         // Basic AI
