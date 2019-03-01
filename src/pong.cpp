@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
     SDL_Window *win = nullptr;
-    SDL_Joystick *controller = nullptr;
+    SDL_GameController *controller = nullptr;
 
     SDL_Haptic *haptic = nullptr;
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -84,7 +84,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         else
         {
             //Load joystick
-            controller = SDL_JoystickOpen( 0 );
+            controller = SDL_GameControllerOpen( 0 );
             if( controller == NULL )
             {
                 printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
@@ -92,7 +92,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
             else
             {
                 //Get controller haptic device
-                haptic = SDL_HapticOpenFromJoystick( controller );
+                haptic = SDL_HapticOpen( controller );
                 if( haptic == NULL )
                 {
                     printf( "Warning: Controller does not support haptics! SDL Error: %s\n", SDL_GetError() );
@@ -195,39 +195,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         if (controller)
         {
             
-            //x_move = SDL_JoystickGetAxis(controller, 0);
-            y_move = SDL_JoystickGetButton(controller, 0);
-            std::cout <<"\nAxis0:" << y_move;
-            y_move = SDL_JoystickGetButton(controller, 1);
-            std::cout <<"\nAxis1:" << y_move;
-            y_move = SDL_JoystickGetButton(controller, 2);
-            std::cout <<"\nAxis2:" << y_move;
-            y_move = SSDL_JoystickGetButton(controller, 3);
-            std::cout <<"\nAxis3:" << y_move;
-            y_move = SDL_JoystickGetButton(controller, 4);
-            std::cout <<"\nAxis4:" << y_move;
-            y_move = SDL_JoystickGetButton(controller, 5);
-            std::cout <<"\nAxis5:" << y_move;
-            y_move = SDL_JoystickGetButton(controller, 6);
-            std::cout <<"\nAxis6:" << y_move;
-                        
-                        y_move = SDL_JoystickGetButton(controller, 7);
-            std::cout <<"\nAxis7:" << y_move;
-                        y_move = SDL_JoystickGetButton(controller, 8);
-            std::cout <<"\nAxis8:" << y_move;
-                        y_move = SDL_JoystickGetButton(controller, 9);
-            std::cout <<"\nAxis9:" << y_move;
-                        y_move = SDL_JoystickGetButton(controller, 10);
-            std::cout <<"\nAxis10:" << y_move;
-                        y_move = SDL_JoystickGetButton(controller, 11);
-            std::cout <<"\nAxis11:" << y_move;
-                        y_move = SDL_JoystickGetButton(controller, 12);
-            std::cout <<"\nAxis12:" << y_move;
-                        y_move = SDL_JoystickGetButton(controller, 13);
-            std::cout <<"\nAxis13:" << y_move;
 
-        int q =  SDL_JoystickNumButtons(controller);
-        std::cout <<"\n" << q;
         }
 
         // Player Movement
