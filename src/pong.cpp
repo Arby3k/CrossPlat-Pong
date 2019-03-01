@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
         while (SDL_PollEvent(&e)){
             if (e.type == SDL_QUIT)
                 quit = true;
-            if (e.type == SDL_KEYDOWN)
+            else if (e.type == SDL_KEYDOWN)
             {
                 switch (e.key.keysym.scancode)
                 {
@@ -203,6 +203,12 @@ int main(int argc, char *argv[])
                     quit = true;
                     break;
                 }
+            }
+            else if( e.type == SDL_JOYBUTTONDOWN ){
+                        //Play rumble at 75% strenght for 500 milliseconds
+                        if( SDL_HapticRumblePlay( gControllerHaptic, 0.75, 500 ) != 0 ){
+                            printf( "Warning: Unable to play rumble! %s\n", SDL_GetError() );
+                        }
             }
         }
 
