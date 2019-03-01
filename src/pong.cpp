@@ -194,7 +194,7 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
 
         if (controller)
         {
-            /*
+            
             //x_move = SDL_JoystickGetAxis(controller, 0);
             y_move = SDL_JoystickGetButton(controller, 0);
             std::cout <<"\nAxis0:" << y_move;
@@ -210,7 +210,21 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
             std::cout <<"\nAxis5:" << y_move;
             y_move = SDL_JoystickGetButton(controller, 6);
             std::cout <<"\nAxis6:" << y_move;
-            */
+                        
+                        y_move = SDL_JoystickGetButton(controller, 7);
+            std::cout <<"\nAxis7:" << y_move;
+                        y_move = SDL_JoystickGetButton(controller, 8);
+            std::cout <<"\nAxis8:" << y_move;
+                        y_move = SDL_JoystickGetButton(controller, 9);
+            std::cout <<"\nAxis9:" << y_move;
+                        y_move = SDL_JoystickGetButton(controller, 10);
+            std::cout <<"\nAxis10:" << y_move;
+                        y_move = SDL_JoystickGetButton(controller, 11);
+            std::cout <<"\nAxis11:" << y_move;
+                        y_move = SDL_JoystickGetButton(controller, 12);
+            std::cout <<"\nAxis12:" << y_move;
+                        y_move = SDL_JoystickGetButton(controller, 13);
+            std::cout <<"\nAxis13:" << y_move;
 
         int q =  SDL_JoystickNumButtons(controller);
         std::cout <<"\n" << q;
