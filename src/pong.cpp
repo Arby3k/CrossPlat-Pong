@@ -263,9 +263,9 @@ int main(int argc, char *argv[])
         }
 
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || yDir > 1)
+        if (keystates[SDL_SCANCODE_UP] || yDir == 1)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || yDir < -1)
+        if (keystates[SDL_SCANCODE_DOWN] || yDir == -1)
             p1.pos.y += p1.speed;
 
         // Basic AI
