@@ -49,7 +49,9 @@ int main(int argc, char *argv[])
     SDL_Event e;
     SDL_Renderer *ren = nullptr;
     SDL_Window *win = nullptr;
-    SDL_Joystick *controller = nullptr;
+    SDL_Joystick *controller  = nullptr;
+    SDL_Joystick *controller1 = nullptr;
+    SDL_Joystick *controller2 = nullptr;
 
     SDL_Haptic *haptic = nullptr;
 
@@ -102,7 +104,10 @@ int main(int argc, char *argv[])
     else
     {
         //Load joystick
-        controller = SDL_JoystickOpen(1);
+        controller = SDL_JoystickOpen(0);
+        controller1 = SDL_JoystickOpen(1);
+        controller2 = SDL_JoystickOpen(2);
+
         if (controller == NULL)
         {
             printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
@@ -198,7 +203,7 @@ int main(int argc, char *argv[])
             {
 
                 switch (e.key.keysym.scancode)
-                {
+                { 
 
                 case SDL_SCANCODE_ESCAPE:
                     quit = true;
