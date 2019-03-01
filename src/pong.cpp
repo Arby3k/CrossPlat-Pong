@@ -213,7 +213,7 @@ int main(int argc, char *argv[])
             else if (e.type == SDL_JOYAXISMOTION)
             {
                 //Motion on controller 0
-                if (e.jaxis.which == 0)
+                if (e.jaxis.which == 0 || e.jaxis.which == 1 || e.jaxis.which == 2 )
                 {
                     //X axis motion
                     if (e.jaxis.axis == 0)
