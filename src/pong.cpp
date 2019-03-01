@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
         else
         {
             //Load joystick
-            controller = SDL_JoystickOpen( 1 );
+            controller = SDL_JoystickOpen( 2 );
             if( controller == NULL )
             {
                 printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
