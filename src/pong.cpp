@@ -187,30 +187,27 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
                     break;
                 }
             }
-            else if( e.type == SDL_JOYAXISMOTION )
-                    {
+            else if( e.type == SDL_JOYAXISMOTION ){
                         //Motion on controller 0
-                        if( e.jaxis.which == 0 )
-                        {                        
+                        if( e.jaxis.which == 0 ){                        
                             //X axis motion
-                            if( e.jaxis.axis == 0 )
-                            {
+                            if( e.jaxis.axis == 0 ){
                                 //Left of dead zone
-                                if( e.jaxis.value < -JOYSTICK_DEAD_ZONE )
-                                {
+                                if( e.jaxis.value < -JOYSTICK_DEAD_ZONE ){
                                     xDir = -1;
                                 }
                                 //Right of dead zone
-                                else if( e.jaxis.value > JOYSTICK_DEAD_ZONE )
-                                {
+                                else if( e.jaxis.value > JOYSTICK_DEAD_ZONE ){
                                     xDir =  1;
                                 }
-                                else
-                                {
+                                else{
                                     xDir = 0;
                                 }
                             }
+                        }
+                    }
         }
+
 
         //Uint8 upButton = 0;
         //Uint8 downButton = 0;
@@ -222,9 +219,9 @@ for (int i = 0; i < SDL_NumJoysticks(); ++i) {
         }
 
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || xDir = 1)
+        if (keystates[SDL_SCANCODE_UP] || xDir == 1)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || xDir = -1)
+        if (keystates[SDL_SCANCODE_DOWN] || xDir == -1)
             p1.pos.y += p1.speed;
 
         // Basic AI
@@ -395,7 +392,7 @@ void Initialise(SDL_Renderer **ren, SDL_Window **win)
         sdl_bomb("Failed to load TTF extension");
 }
 
-void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_Jo **controller)
+void Cleanup(SDL_Renderer **ren, SDL_Window **win, SDL_Joystick **controller)
 {
     SDL_DestroyRenderer(*ren);
     SDL_DestroyWindow(*win);
