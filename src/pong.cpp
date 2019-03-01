@@ -211,15 +211,16 @@ int main(int argc, char *argv[])
 
 
 
-        short upButton = 0;
-        short downButton = 0;
+        static short upButton = 0;
+        static short downButton = 0;
 
         if (controller)
         {
             //std::cout << SDL_JoystickNumButtons(controller) << "\n";
             downButton = SDL_JoystickGetButton(controller, 13);
+            std::cout << downButton << "\r"; 
             upButton = SDL_JoystickGetButton(controller, 0);
-            SDL_HapticRumblePlay(haptic, 0.7, 1000);
+            //SDL_HapticRumblePlay(haptic, 0.7, 1000);
 
         }
 
