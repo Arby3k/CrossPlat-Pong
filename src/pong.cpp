@@ -175,8 +175,8 @@ int main(int argc, char *argv[])
     char buffer[512];
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
 
-    while (!quit)
-    {
+    while (!quit){
+
         short upButton = 0;
         short downButton = 0;
 
@@ -214,18 +214,21 @@ int main(int argc, char *argv[])
 
 
 
-  
-/*
+        Uint8 upButton = 0;
+        Uint8 downButton = 0;
+
         if (controller)
         {
-            
+            cout << SDL_JoystickNumButtons(controller) << "\n";
+            downButton = SDL_JoystickGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+            upButton = SDL_JoystickGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
 
         }
-*/
+
         // Player Movement
-        if (keystates[SDL_SCANCODE_UP] || upButton == 1)
+        if (keystates[SDL_SCANCODE_UP] || upButton)
             p1.pos.y -= p1.speed;
-        if (keystates[SDL_SCANCODE_DOWN] || downButton == 1)
+        if (keystates[SDL_SCANCODE_DOWN] || downButton)
             p1.pos.y += p1.speed;
 
         // Basic AI
